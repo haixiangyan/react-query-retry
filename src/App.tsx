@@ -17,7 +17,7 @@ const fetchList = (): Promise<ListItem[]> => {
   console.log('start fetch...')
   counter += 1;
   // 成功
-  if (counter > 3) {
+  if (counter === 3) {
     return new Promise(resolve => {
       counter = 1;
 
@@ -65,11 +65,9 @@ function App() {
     try {
       const list = await fetchList();
 
-      setResults(pushResults(results, JSON.stringify(list)));
+      setResults(r => pushResults(r, JSON.stringify(list)));
     } catch (e) {
-      const x = pushResults(results, String(e))
-
-      setResults(x);
+      setResults(r => pushResults(r, String(e)));
 
       await onQuery();
     }
